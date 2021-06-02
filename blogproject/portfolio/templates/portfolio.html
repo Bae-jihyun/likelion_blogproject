@@ -1,0 +1,10 @@
+{% for portfolio in portfolios.all %}
+<div class="card" style="width: 18rem">
+  <img src="{{portfolio.image.url}}" />
+  <div class="card-body">
+    <h5 class="card-title">{{portfolio.title}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{portfolio.pub_date}}</h6>
+    <p class="card-text">{{portfolio.body}}</p>
+  </div>
+</div>
+{% endfor%}

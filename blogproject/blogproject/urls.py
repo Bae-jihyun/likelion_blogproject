@@ -15,16 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
 import blog.views
 import portfolio.views
+# import login.views
+#from account import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
     path('',blog.views.intro,name="intro"),
-    path('blog',blog.views.home, name="home"),
-    path('blog/<int:blog_id>',blog.views.detail,name='detail'),
-    path('about_me',blog.views.myself,name ='myself'),
-    path('blog/new',blog.views.new,name="new"),
-    path('blog/create',blog.views.create,name="create"),
+    path('blog/',blog.views.home, name="home"),
+    path('about_me/',blog.views.myself,name ='myself'),
     path('portfolio/',portfolio.views.portfolio, name="portfolio"),
-]
+    path('blog/',include('blog.urls')),
+    #path('login/',include('account.urls')),
+    # path("",login.views.login,name="login"),
+    # path("account/",include('account.urls')),
+    # path('account/', include('allauth.urls')),
+] + static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
